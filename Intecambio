@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ideas para intercambio navideño</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#d97706;--muted:#94a3b8;--glass: rgba(255,255,255,0.03)}
+    *{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+    body{margin:0;background:linear-gradient(180deg,#071129 0%, #0f1724 100%);color:#e6eef8;min-height:100vh;padding:28px}
+    .container{max-width:1000px;margin:0 auto}
+    header{display:flex;gap:16px;align-items:center;margin-bottom:20px}
+    h1{margin:0;font-size:1.6rem}
+    p.lead{margin:0;color:var(--muted)}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    .controls{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+    input[type=text],select{background:var(--glass);border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:8px;color:inherit}
+    button{background:var(--accent);border:none;padding:10px 14px;border-radius:8px;color:#061019;font-weight:600;cursor:pointer}
+    .list{margin-top:12px}
+    ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+    li.item{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:8px}
+    .meta{font-size:0.85rem;color:var(--muted)}
+    .actions{display:flex;gap:8px;margin-top:6px}
+    .tag{display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(0,0,0,0.25);font-size:0.75rem}
+    .add-row{display:flex;gap:8px;margin-top:12px}
+    .small{font-size:0.85rem;color:var(--muted)}
+    footer{margin-top:18px;color:var(--muted);font-size:0.85rem}
+    @media (max-width:520px){header{flex-direction:column;align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Ideas para intercambio navideño</h1>
+        <p class="lead">Lista interactiva para anotar, filtrar y compartir ideas de regalos.</p>
+      </div>
+    </header>
+
+    <div class="card">
+      <div class="controls">
+        <input id="search" type="text" placeholder="Buscar (ej. taza, libro, calcetines)..." />
+        <select id="priceFilter">
+          <option value="all">Cualquier precio</option>
+          <option value="0-10">$0 - $10</option>
+          <option value="10-20">$10 - $20</option>
+          <option value="20-50">$20 - $50</option>
+          <option value="50+">$50+</option>
+        </select>
+        <select id="categoryFilter">
+          <option value="all">Todas las categorías</option>
+          <option value="hogar">Hogar</option>
+          <option value="comida">Comida & bebidas</option>
+          <option value="tecnologia">Tecnología</option>
+          <option value="accesorios">Accesorios</option>
+          <option value="experiencias">Experiencias</option>
+        </select>
+        <button id="addSample">Agregar ideas de ejemplo</button>
+        <button id="exportBtn">Exportar (texto)</button>
+        <button id="printBtn">Imprimir</button>
+      </div>
+
+      <div class="add-row small">
+        <input id="newName" type="text" placeholder="Nombre del regalo (ej. Taza térmica)" style="flex:1" />
+        <input id="newCategory" type="text" placeholder="Categoría (ej. hogar)" />
+        <input id="newPrice" type="number" placeholder="Precio aprox" />
+        <button id="addBtn">Añadir</button>
+      </div>
+ 
+      <div class="list" id="listContainer">
+        <ul id="items"></ul>
+      </div>
+
+      <footer>
+        Consejo: usa el buscador y los filtros para reducir opciones. Puedes añadir tus propias ideas y luego exportarlas para compartirlas por chat o imprimirlas.
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const itemsEl = document.getElementById('items');
+    const searchEl = document.getElementById('search');
+    const priceFilterEl = document.getElementById('priceFilter');
+    const categoryFilterEl = document.getElementById('categoryFilter');
+
+    let items = [];
+
+    function render(){
+      const q = searchEl.value.trim().toLowerCase();
+      const priceSel = priceFilterEl.value;
+      const cat = categoryFilterEl.value;
+
+      itemsEl.innerHTML = '';
+      const filtered = items.filter(it => {
+        if(cat !== 'all' && it.category.toLowerCase() !== cat.toLowerCase()) return false;
+        if(q && !(it.name.toLowerCase().includes(q) || (it.note||'').toLowerCase().includes(q))) return false;
+        if(priceSel !== 'all'){
+          const p = Number(it.price || 0);
+          if(priceSel === '0-10' && !(p >=0 && p <=10)) return false;
+          if(priceSel === '10-20' && !(p >10 && p <=20)) return false;
+          if(priceSel === '20-50' && !(p >20 && p <=50)) return false;
+          if(priceSel === '50+' && !(p >50)) return false;
+        }
+        return true;
+      });
+
+      if(filtered.length === 0){
+        itemsEl.innerHTML = '<p class="small">No hay ideas que coincidan. Añade algunas o quita filtros.</p>';
+        return;
+      }
+
+      for(const it of filtered){
+        const li = document.createElement('li'); li.className='item';
+        li.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <strong>${escapeHtml(it.name)}</strong>
+            <span class="tag">${escapeHtml(it.category)} • ${it.price ? '$'+it.price : '—'}</span>
+          </div>
+          <div class="meta">${escapeHtml(it.note || '')}</div>
+          <div class="actions">
+            <button onclick="copyText(${JSON.stringify(it)})">Copiar</button>
+            <button onclick='removeItem(${it.id})'>Eliminar</button>
+          </div>`;
+        itemsEl.appendChild(li);
+      }
+    }
+
+    function escapeHtml(s){ if(!s) return ''; return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
+
+    function addItem(name, category, price, note){
+      const id = Date.now() + Math.floor(Math.random()*999);
+      items.unshift({id,name,category,price,note});
+      render();
+    }
+
+    function removeItem(id){ items = items.filter(i=>i.id !== id); render(); }
+
+    function copyText(obj){
+      const txt = `${obj.name} — ${obj.category} — ${obj.price ? '$'+obj.price : 'Precio: —'}${obj.note ? '\n'+obj.note : ''}`;
+      navigator.clipboard?.writeText(txt).then(()=>alert('Copiado al portapapeles'))
+        .catch(()=>alert('No se pudo copiar'));
+    }
+
+    document.getElementById('addBtn').addEventListener('click', ()=>{
+      const name = document.getElementById('newName').value.trim();
+      const category = document.getElementById('newCategory').value.trim() || 'Varios';
+      const price = document.getElementById('newPrice').value.trim();
+      if(!name) return alert('Escribe el nombre del regalo');
+      addItem(name, category, price || '', '');
+      document.getElementById('newName').value=''; document.getElementById('newPrice').value=''; document.getElementById('newCategory').value='';
+    });
+
+    searchEl.addEventListener('input', render);
+    priceFilterEl.addEventListener('change', render);
+    categoryFilterEl.addEventListener('change', render);
+
+    document.getElementById('exportBtn').addEventListener('click', ()=>{
+      const lines = items.map(i=>`${i.name} — ${i.category} — ${i.price ? '$'+i.price : '—'}${i.note ? ' // '+i.note : ''}`);
+      const blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'ideas-regalos.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    document.getElementById('printBtn').addEventListener('click', ()=>window.print());
+
+    document.getElementById('addSample').addEventListener('click', ()=>{
+      const sample = [
+        {name:'Taza térmica',category:'hogar',price:12,note:'Útil, para cafés o té'},
+        {name:'Libro de bolsillo',category:'accesorios',price:8,note:'Busca bestsellers o clásicos'},
+        {name:'Set de calcetines navideños',category:'accesorios',price:6,note:'Divertidos y económicos'},
+        {name:'Tarjeta regalo (tienda local)',category:'comida',price:20,note:'Flexible según gustos'},
+        {name:'Tarjeta para café',category:'comida',price:10,note:'Para un break cercano'},
+        {name:'Llavero original',category:'hogar',price:4,note:''}
+      ];
+      sample.forEach(s=>addItem(s.name,s.category,s.price,s.note));
+    });
+
+    // small utility: load from localStorage if exists
+    try{
+      const saved = localStorage.getItem('ideas_regalo_v1');
+      if(saved) items = JSON.parse(saved);
+    }catch(e){items = []}
+
+    // persist every 3s
+    setInterval(()=>localStorage.setItem('ideas_regalo_v1', JSON.stringify(items)),3000);
+
+    // initial render
+    render();
+  </script>
+</body>
+</html>
