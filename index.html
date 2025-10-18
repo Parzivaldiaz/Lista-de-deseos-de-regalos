@@ -1,210 +1,55 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>🎁 Lista de deseos navideños de Damián 🎄</title>
-  <style>
-    :root {
-      --bg: #0f1724;
-      --card: #0b1220;
-      --accent: #facc15;
-      --muted: #94a3b8;
-      --glass: rgba(255, 255, 255, 0.03);
-    }
-    * {
-      box-sizing: border-box;
-      font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    body {
-      margin: 0;
-      background: linear-gradient(180deg, #071129 0%, #0f1724 100%);
-      color: #e6eef8;
-      min-height: 100vh;
-      padding: 28px;
-      overflow-x: hidden;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 24px;
-      position: relative;
-    }
-    header h1 {
-      font-size: 1.8rem;
-      color: #facc15;
-      margin: 0;
-    }
-    header img.gift {
-      width: 40px;
-      position: absolute;
-      animation: floaty 3s ease-in-out infinite;
-    }
-    header img.left {
-      left: 15%;
-      top: -10px;
-      animation-delay: 0.5s;
-    }
-    header img.right {
-      right: 15%;
-      top: -10px;
-      animation-delay: 1.5s;
-    }
-    @keyframes floaty {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-    .card {
-      background: var(--card);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
-    }
-    .add-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-    input, button {
-      border-radius: 8px;
-      padding: 10px;
-      border: none;
-    }
-    input {
-      background: var(--glass);
-      color: white;
-      flex: 1;
-    }
-    button {
-      background: var(--accent);
-      color: #061019;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 14px;
-    }
-    .gift-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 12px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .gift-card img {
-      width: 100%;
-      border-radius: 10px;
-      height: 160px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-      cursor: pointer;
-    }
-    .gift-card img:hover {
-      transform: scale(1.05);
-    }
-    .gift-card h3 {
-      margin: 8px 0 4px;
-      color: #facc15;
-      font-size: 1rem;
-    }
-    .gift-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-    footer {
-      margin-top: 20px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎄 Ideas de Regalos Navideños 🎁</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #071129, #0f1724);
+    color: #e6eef8;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+  h1 { text-align:center; font-size:2rem; margin-bottom:30px; }
+  .category { margin-bottom:40px; }
+  .category h2 { color:#d97706; margin-bottom:15px; }
+  .products { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
+  .product {
+    width:180px; text-align:center; border-radius:12px;
+    overflow:hidden; transition: transform 0.3s;
+  }
+  .product img {
+    width:100%; border-radius:12px; cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,0.5);
+    transition: transform 0.3s;
+  }
+  .product img:hover { transform: scale(1.1) rotate(3deg); }
+  .product p { margin-top:6px; font-size:0.85rem; color:#94a3b8; }
+  /* Animación copos de nieve */
+  .snowflake {
+    position: absolute; top: -10px; z-index:999; pointer-events:none;
+    font-size:24px; color:#ffffff; user-select:none;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-100px); }
+    100% { transform: translateY(100vh); }
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="https://cdn-icons-png.flaticon.com/512/3081/3081875.png" class="gift left" />
-      <h1>🎄 Lista de deseos navideños 🎁</h1>
-      <img src="https://cdn-icons-png.flaticon.com/512/3081/3081881.png" class="gift right" />
-      <p>Estas son ideas de regalos que me encantaría recibir 🎅</p>
-    </header>
 
-    <div class="card">
-      <div class="add-row">
-        <input id="name" type="text" placeholder="Nombre del regalo (ej. Reloj elegante)" />
-        <input id="image" type="text" placeholder="URL de la imagen" />
-        <input id="link" type="text" placeholder="Enlace al producto" />
-        <button id="addBtn">Añadir</button>
-      </div>
+<h1>🎄 Ideas de Regalos Navideños 🎁</h1>
 
-      <div class="grid" id="giftGrid"></div>
-    </div>
+<!-- Regalos Pro -->
+<div class="category">
+  <h2>🎁 Regalos Pro</h2>
+  <div class="products">
+    <div class="product">
+      <a href="h
 
-    <footer>
-      Hecho con 💛 por Damián — Comparte el espíritu navideño 🎅
-    </footer>
-  </div>
-
-  <script>
-    const giftGrid = document.getElementById("giftGrid");
-    const gifts = JSON.parse(localStorage.getItem("navidad_gifts_v2") || "[]");
-
-    function render() {
-      giftGrid.innerHTML = "";
-      for (const gift of gifts) {
-        const card = document.createElement("div");
-        card.className = "gift-card";
-        card.innerHTML = `
-          <a href="${gift.link}" target="_blank">
-            <img src="${gift.image}" alt="${gift.name}" />
-          </a>
-          <h3>${gift.name}</h3>
-        `;
-        giftGrid.appendChild(card);
-      }
-      localStorage.setItem("navidad_gifts_v2", JSON.stringify(gifts));
-    }
-
-    document.getElementById("addBtn").addEventListener("click", () => {
-      const name = document.getElementById("name").value.trim();
-      const image = document.getElementById("image").value.trim();
-      const link = document.getElementById("link").value.trim();
-      if (!name || !image || !link) return alert("Completa todos los campos 🎁");
-      gifts.push({ name, image, link });
-      render();
-      document.getElementById("name").value = "";
-      document.getElementById("image").value = "";
-      document.getElementById("link").value = "";
-    });
-
-    // Ideas de ejemplo
-    if (gifts.length === 0) {
-      gifts.push(
-        {
-          name: "Audífonos inalámbricos",
-          image: "https://m.media-amazon.com/images/I/71Z5N6VZPCL._AC_SL1500_.jpg",
-          link: "https://www.amazon.com.mx/dp/B0BHKYHYTG",
-        },
-        {
-          name: "Taza térmica con diseño navideño",
-          image: "https://m.media-amazon.com/images/I/61y6j8lLkEL._AC_SL1500_.jpg",
-          link: "https://www.amazon.com.mx/dp/B0CPNYHX5Z",
-        },
-        {
-          name: "Sudadera suave con gorro",
-          image: "https://m.media-amazon.com/images/I/71Z2tB02RjL._AC_SL1500_.jpg",
-          link: "https://www.amazon.com.mx/dp/B09ND3B2RC",
-        }
-      );
-    }
-
-    render();
-  </script>
-</body>
 </html>
+
