@@ -1,171 +1,105 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎄 Ideas de Regalos Navideños 🎁</title>
-<style>
-  /* =================================
-     ESTILOS GENERALES DEL BODY
-  ================================= */
-  body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #071129, #0f1724);
-    color: #e6eef8;
-    margin: 0;
-    padding: 20px;
-    overflow-x: hidden;
-    position: relative;
-    min-height: 100vh;
-    border: 8px solid transparent;
-    border-image: linear-gradient(90deg, red, gold, green, gold, red) 1;
-    animation: luces-borde 3s linear infinite;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎁 Ideas de Regalos Pro 🎮</title>
+  <style>
+    /* --- ESTILOS GENERALES DE LA PÁGINA --- */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe6e6, #e6f3ff);
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
 
-  /* ✨ Animación del borde parpadeante ✨ */
-  @keyframes luces-borde {
-    0% { border-image: linear-gradient(90deg, red, gold, green, gold, red) 1; }
-    25% { border-image: linear-gradient(90deg, gold, green, red, green, gold) 1; }
-    50% { border-image: linear-gradient(90deg, green, red, gold, red, green) 1; }
-    75% { border-image: linear-gradient(90deg, red, gold, green, red, gold) 1; }
-    100% { border-image: linear-gradient(90deg, red, gold, green, gold, red) 1; }
-  }
+    h1 {
+      font-size: 2.2em;
+      color: #222;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
 
-  /* TITULO PRINCIPAL */
-  h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    text-shadow: 0 0 10px #ffd700, 0 0 20px #ff4500;
-    animation: luces-titulo 2s infinite alternate;
-  }
+    /* --- CONTENEDOR DE PRODUCTOS --- */
+    .product-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
 
-  /* 💡 Efecto parpadeante del título */
-  @keyframes luces-titulo {
-    0% { color: #fff; text-shadow: 0 0 10px #ffd700; }
-    50% { color: #ffd700; text-shadow: 0 0 20px #ff4500; }
-    100% { color: #ff4500; text-shadow: 0 0 30px #ffd700; }
-  }
+    /* --- CADA PRODUCTO INDIVIDUAL --- */
+    .product {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      width: 230px;
+    }
 
-  /* =========================
-     ESTILOS DE CATEGORÍAS
-  ========================= */
-  .category {
-    margin-bottom: 40px;
-  }
+    /* --- EFECTO HOVER --- */
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
 
-  .category h2 {
-    color: #d97706;
-    margin-bottom: 15px;
-  }
+    /* --- IMÁGENES DE PRODUCTOS --- */
+    .product img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-bottom: 2px solid #eee;
+    }
 
-  .products {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-  }
+    /* --- TEXTO DE CADA PRODUCTO --- */
+    .product p {
+      font-weight: 600;
+      color: #333;
+      margin: 10px 0 15px;
+    }
 
-  .product {
-    width: 180px;
-    text-align: center;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
+    /* --- ENLACES (EL CONTENEDOR ES CLICABLE) --- */
+    .product a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
 
-  .product a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .product img {
-    width: 100%;
-    border-radius: 12px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    transition: transform 0.3s;
-  }
-
-  /* Efecto al pasar el mouse sobre la imagen */
-  .product img:hover {
-    transform: scale(1.1) rotate(3deg);
-  }
-
-  .product p {
-    margin-top: 6px;
-    font-size: 0.85rem;
-    color: #94a3b8;
-  }
-
-  /* ❄ Animación copos de nieve ❄ */
-  .snowflake {
-    position: fixed;
-    top: -10px;
-    z-index: 999;
-    pointer-events: none;
-    color: #ffffff;
-    user-select: none;
-    animation: fall linear infinite;
-  }
-
-  @keyframes fall {
-    0% { transform: translateY(-10px) translateX(0); }
-    50% { transform: translateY(50vh) translateX(20px); }
-    100% { transform: translateY(100vh) translateX(-20px); opacity: 0.3; }
-  }
-</style>
+    footer {
+      margin-top: 30px;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
 
-<h1>🎄 Ideas de Regalos Navideños 🎁</h1>
+  <h1>🎮 Regalos Pro que Enamoran 💝</h1>
 
-<!-- =========================
-     REGALOS PRO
-========================= -->
-<div class="category">
-  <h2>🎁 Regalos Pro</h2>
-  <div class="products">
-    <!-- Producto 1 -->
+  <div class="product-container">
+
+    <!-- PRODUCTO 1: Retroid Pocket Flip 2 -->
     <div class="product">
+      <!-- Al hacer clic en la imagen, te lleva al producto -->
       <a href="https://www.aliexpress.com/item/1005008579813379.html?pdp_ext_f=%7B%22sku_id%22%3A%2212000047641224748%22%7D&sourceType=1&spm=a2g0o.wish-manage-home.0.0" target="_blank">
-        <img src="https://ae01.alicdn.com/kf/S9eabf8a84e504c48a92c1e52f3f3c080c.jpg" alt="Retroid Pocket Flip2">
-        <p>Retroid Pocket Flip2</p>
+        <img src="https://i.imgur.com/tPmCQ1V.jpeg" alt="Retroid Pocket Flip 2">
+        <p>Retroid Pocket Flip 2</p>
       </a>
     </div>
 
-    <!-- Producto 2 -->
+    <!-- PRODUCTO 2: Jimny de Control Remoto -->
     <div class="product">
       <a href="https://es.aliexpress.com/item/1005008683660781.html?src=google&pdp_npi=4%40dis!MXN!13089.09!6541.92!!!!!%40!12000046229427495!ppc!!!&snps=y&snpsid=1&src=google&albch=shopping&acnt=752-015-9270&isdl=y&slnk=&plac=&mtctp=&albbt=Google_7_shopping&aff_platform=google&aff_short_key=_oDeeeiG&gclsrc=aw.ds&&albagn=888888&&ds_e_adid=775633910361&ds_e_matchtype=search&ds_e_device=c&ds_e_network=g&ds_e_product_group_id=2442123901331&ds_e_product_id=es1005008683660781&ds_e_product_merchant_id=5551326180&ds_e_product_country=MX&ds_e_product_language=es&ds_e_product_channel=online&ds_e_product_store_id=&ds_url_v=2&albcp=23046394044&albag=185569735643&isSmbAutoCall=false&needSmbHouyi=false&gad_source=1&gad_campaignid=23046394044&gbraid=0AAAAA_eFwRBjAnaalKW7G0tBctZnX9aOv&gclid=CjwKCAjw3tzHBhBREiwAlMJoUh1eUbeaZQFJdG24pztWeBgy4oTX-ZzOlV0zOphDnKoP213kqdtY_RoCyG4QAvD_BwE" target="_blank">
-        <img src="https://ae01.alicdn.com/kf/Sad2a3c0a3f7b4d1f9e8d3f1b5e09f4a7n.jpg" alt="Jimny Control Remoto">
+        <img src="https://i.imgur.com/0bJj0SI.png" alt="Jimny Control Remoto">
         <p>Jimny Control Remoto</p>
       </a>
     </div>
+
   </div>
-</div>
 
-<!-- =========================
-     SCRIPT PARA COPOS DE NIEVE
-========================= -->
-<script>
-  const numFlakes = 40; // cantidad de copos
-  for (let i = 0; i < numFlakes; i++) {
-    const flake = document.createElement("span");
-    flake.classList.add("snowflake");
-    flake.textContent = "❄";
-
-    // posición y propiedades aleatorias
-    flake.style.left = Math.random() * 100 + "vw";
-    flake.style.animationDuration = 5 + Math.random() * 5 + "s";
-    flake.style.animationDelay = Math.random() * 5 + "s";
-    flake.style.opacity = Math.random();
-    flake.style.fontSize = 10 + Math.random() * 20 + "px";
-
-    document.body.appendChild(flake);
-  }
-</script>
+  <footer>✨ Hecho con cariño por Damián ✨</footer>
 
 </body>
 </html>
-
-
