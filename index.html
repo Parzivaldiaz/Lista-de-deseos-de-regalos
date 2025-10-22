@@ -13,13 +13,34 @@
     padding: 20px;
     overflow-x: hidden;
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
+    border: 8px solid transparent;
+    border-image: linear-gradient(90deg, red, gold, green, gold, red) 1;
+    animation: luces-borde 3s linear infinite;
+  }
+
+  /* ✨ Animación del borde parpadeante ✨ */
+  @keyframes luces-borde {
+    0% { border-image: linear-gradient(90deg, red, gold, green, gold, red) 1; }
+    25% { border-image: linear-gradient(90deg, gold, green, red, green, gold) 1; }
+    50% { border-image: linear-gradient(90deg, green, red, gold, red, green) 1; }
+    75% { border-image: linear-gradient(90deg, red, gold, green, red, gold) 1; }
+    100% { border-image: linear-gradient(90deg, red, gold, green, gold, red) 1; }
   }
 
   h1 {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 30px;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #ff4500;
+    animation: luces-titulo 2s infinite alternate;
+  }
+
+  /* 💡 Efecto parpadeante del título */
+  @keyframes luces-titulo {
+    0% { color: #fff; text-shadow: 0 0 10px #ffd700; }
+    50% { color: #ffd700; text-shadow: 0 0 20px #ff4500; }
+    100% { color: #ff4500; text-shadow: 0 0 30px #ffd700; }
   }
 
   .category {
@@ -43,7 +64,12 @@
     text-align: center;
     border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .product a {
+    text-decoration: none;
+    color: inherit;
   }
 
   .product img {
@@ -76,16 +102,9 @@
   }
 
   @keyframes fall {
-    0% {
-      transform: translateY(-10px) translateX(0);
-    }
-    50% {
-      transform: translateY(50vh) translateX(20px);
-    }
-    100% {
-      transform: translateY(100vh) translateX(-20px);
-      opacity: 0.3;
-    }
+    0% { transform: translateY(-10px) translateX(0); }
+    50% { transform: translateY(50vh) translateX(20px); }
+    100% { transform: translateY(100vh) translateX(-20px); opacity: 0.3; }
   }
 </style>
 </head>
@@ -98,31 +117,41 @@
   <h2>🎁 Regalos Pro</h2>
   <div class="products">
     <div class="product">
-      <img src="https://via.placeholder.com/180x180.png?text=Perfume" alt="Perfume">
-      <p>Perfume elegante</p>
+      <a href="https://www.amazon.com.mx/dp/B0CJKP5MLC" target="_blank">
+        <img src="https://via.placeholder.com/180x180.png?text=Perfume" alt="Perfume">
+        <p>Perfume elegante</p>
+      </a>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/180x180.png?text=Audífonos" alt="Audífonos">
-      <p>Audífonos inalámbricos</p>
+      <a href="https://www.amazon.com.mx/dp/B09V7HYD8Z" target="_blank">
+        <img src="https://via.placeholder.com/180x180.png?text=Audífonos" alt="Audífonos">
+        <p>Audífonos inalámbricos</p>
+      </a>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/180x180.png?text=Reloj" alt="Reloj">
-      <p>Reloj moderno</p>
+      <a href="https://www.amazon.com.mx/dp/B0C9S23STZ" target="_blank">
+        <img src="https://via.placeholder.com/180x180.png?text=Reloj" alt="Reloj">
+        <p>Reloj moderno</p>
+      </a>
     </div>
   </div>
 </div>
 
-<!-- Otra categoría -->
+<!-- Regalos Económicos -->
 <div class="category">
   <h2>🎅 Regalos Económicos</h2>
   <div class="products">
     <div class="product">
-      <img src="https://via.placeholder.com/180x180.png?text=Taza" alt="Taza">
-      <p>Taza personalizada</p>
+      <a href="https://www.amazon.com.mx/dp/B0CGR5QJ58" target="_blank">
+        <img src="https://via.placeholder.com/180x180.png?text=Taza" alt="Taza">
+        <p>Taza personalizada</p>
+      </a>
     </div>
     <div class="product">
-      <img src="https://via.placeholder.com/180x180.png?text=Calcetas" alt="Calcetas">
-      <p>Calcetas divertidas</p>
+      <a href="https://www.amazon.com.mx/dp/B08RYQQ96F" target="_blank">
+        <img src="https://via.placeholder.com/180x180.png?text=Calcetas" alt="Calcetas">
+        <p>Calcetas divertidas</p>
+      </a>
     </div>
   </div>
 </div>
@@ -148,3 +177,8 @@
 
 </body>
 </html>
+
+
+</body>
+</html>
+
