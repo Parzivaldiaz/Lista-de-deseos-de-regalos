@@ -12,31 +12,80 @@
     margin: 0;
     padding: 20px;
     overflow-x: hidden;
+    position: relative;
+    height: 100vh;
   }
-  h1 { text-align:center; font-size:2rem; margin-bottom:30px; }
-  .category { margin-bottom:40px; }
-  .category h2 { color:#d97706; margin-bottom:15px; }
-  .products { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .category {
+    margin-bottom: 40px;
+  }
+
+  .category h2 {
+    color: #d97706;
+    margin-bottom: 15px;
+  }
+
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+
   .product {
-    width:180px; text-align:center; border-radius:12px;
-    overflow:hidden; transition: transform 0.3s;
-  }
-  .product img {
-    width:100%; border-radius:12px; cursor:pointer;
-    box-shadow:0 4px 12px rgba(0,0,0,0.5);
+    width: 180px;
+    text-align: center;
+    border-radius: 12px;
+    overflow: hidden;
     transition: transform 0.3s;
   }
-  .product img:hover { transform: scale(1.1) rotate(3deg); }
-  .product p { margin-top:6px; font-size:0.85rem; color:#94a3b8; }
-  /* Animación copos de nieve */
+
+  .product img {
+    width: 100%;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    transition: transform 0.3s;
+  }
+
+  .product img:hover {
+    transform: scale(1.1) rotate(3deg);
+  }
+
+  .product p {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: #94a3b8;
+  }
+
+  /* ❄ Animación copos de nieve ❄ */
   .snowflake {
-    position: absolute; top: -10px; z-index:999; pointer-events:none;
-    font-size:24px; color:#ffffff; user-select:none;
+    position: fixed;
+    top: -10px;
+    z-index: 999;
+    pointer-events: none;
+    color: #ffffff;
+    user-select: none;
     animation: fall linear infinite;
   }
+
   @keyframes fall {
-    0% { transform: translateY(-100px); }
-    100% { transform: translateY(100vh); }
+    0% {
+      transform: translateY(-10px) translateX(0);
+    }
+    50% {
+      transform: translateY(50vh) translateX(20px);
+    }
+    100% {
+      transform: translateY(100vh) translateX(-20px);
+      opacity: 0.3;
+    }
   }
 </style>
 </head>
@@ -49,7 +98,53 @@
   <h2>🎁 Regalos Pro</h2>
   <div class="products">
     <div class="product">
-      <a href="h
+      <img src="https://via.placeholder.com/180x180.png?text=Perfume" alt="Perfume">
+      <p>Perfume elegante</p>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/180x180.png?text=Audífonos" alt="Audífonos">
+      <p>Audífonos inalámbricos</p>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/180x180.png?text=Reloj" alt="Reloj">
+      <p>Reloj moderno</p>
+    </div>
+  </div>
+</div>
 
+<!-- Otra categoría -->
+<div class="category">
+  <h2>🎅 Regalos Económicos</h2>
+  <div class="products">
+    <div class="product">
+      <img src="https://via.placeholder.com/180x180.png?text=Taza" alt="Taza">
+      <p>Taza personalizada</p>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/180x180.png?text=Calcetas" alt="Calcetas">
+      <p>Calcetas divertidas</p>
+    </div>
+  </div>
+</div>
+
+<!-- Script para crear copos de nieve -->
+<script>
+  const numFlakes = 40; // cantidad de copos
+  for (let i = 0; i < numFlakes; i++) {
+    const flake = document.createElement("span");
+    flake.classList.add("snowflake");
+    flake.textContent = "❄";
+
+    // posición y propiedades aleatorias
+    flake.style.left = Math.random() * 100 + "vw";
+    flake.style.animationDuration = 5 + Math.random() * 5 + "s";
+    flake.style.animationDelay = Math.random() * 5 + "s";
+    flake.style.opacity = Math.random();
+    flake.style.fontSize = 10 + Math.random() * 20 + "px";
+
+    document.body.appendChild(flake);
+  }
+</script>
+
+</body>
 </html>
-
