@@ -5,181 +5,172 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎄 Lista de Deseos Navideños 🎁</title>
 <style>
-  /* --- ESTILOS GENERALES --- */
+  /* Fondo con animación de copos */
   body {
-    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #001f3f, #004d40);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #ffe6e6, #e6f3ff);
-    overflow-x: hidden;
   }
 
-  /* --- COPOS DE NIEVE (ANIMACIÓN) --- */
+  h1 {
+    font-size: 2.5em;
+    margin-top: 20px;
+    animation: colorChange 5s infinite alternate;
+  }
+
+  @keyframes colorChange {
+    0% { text-shadow: 0 0 10px red; color: #ff4d4d; }
+    25% { text-shadow: 0 0 10px green; color: #00ff99; }
+    50% { text-shadow: 0 0 10px blue; color: #66ccff; }
+    75% { text-shadow: 0 0 10px purple; color: #cc66ff; }
+    100% { text-shadow: 0 0 10px gold; color: #ffff66; }
+  }
+
+  /* Contenedor de productos */
+  .product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+  }
+
+  .product {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    padding: 15px;
+  }
+
+  .product:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 25px rgba(255,255,255,0.6);
+  }
+
+  .product img {
+    width: 100%;
+    border-radius: 15px;
+  }
+
+  .product p {
+    font-size: 1.1em;
+    margin-top: 10px;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  /* Copos de nieve animados */
   @keyframes snow {
-    0% { transform: translateY(0); opacity: 1; }
+    0% { transform: translateY(0px); opacity: 1; }
     100% { transform: translateY(100vh); opacity: 0; }
   }
 
   .snowflake {
     position: fixed;
     top: -10px;
-    color: white;
-    font-size: 1.5em;
-    opacity: 0.8;
-    animation: snow linear infinite;
-    pointer-events: none;
-    z-index: 1000;
-  }
-
-  /* --- TÍTULO PRINCIPAL --- */
-  h1 {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 2.8em;
-    color: #fff;
-    text-shadow: 0 0 10px #ff0033, 0 0 20px #00ccff, 0 0 30px #33ff00;
-    animation: glow 5s linear infinite;
-  }
-
-  /* --- EFECTO DE CONTORNO CAMBIANTE --- */
-  @keyframes glow {
-    0% { text-shadow: 0 0 10px #ff0033, 0 0 20px #00ccff, 0 0 30px #33ff00; }
-    25% { text-shadow: 0 0 10px #33ff00, 0 0 20px #ffcc00, 0 0 30px #00ccff; }
-    50% { text-shadow: 0 0 10px #00ccff, 0 0 20px #ff66cc, 0 0 30px #ff0033; }
-    75% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #33ff00, 0 0 30px #00ccff; }
-    100% { text-shadow: 0 0 10px #ff0033, 0 0 20px #00ccff, 0 0 30px #33ff00; }
-  }
-
-  /* --- CONTENEDOR DE PRODUCTOS --- */
-  .product-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
-  }
-
-  /* --- TARJETA DE PRODUCTO --- */
-  .product {
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-    width: 230px;
-    border: 3px solid transparent;
-    animation: borderGlow 6s linear infinite;
-    text-align: center; /* Centra el texto */
-  }
-
-  /* --- EFECTO DE BORDE CAMBIANTE --- */
-  @keyframes borderGlow {
-    0% { border-color: #ff0033; }
-    25% { border-color: #00ccff; }
-    50% { border-color: #33ff00; }
-    75% { border-color: #ffcc00; }
-    100% { border-color: #ff0033; }
-  }
-
-  .product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  }
-
-  .product img {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
-  }
-
-  .product p {
-    font-weight: 600;
-    color: #333;
-    margin: 10px 0 15px;
-    text-align: center;
-  }
-
-  .product a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-
-  footer {
-    text-align: center;
-    margin: 30px 0;
     font-size: 1em;
-    color: #444;
+    color: white;
+    animation: snow linear infinite;
+    z-index: 999;
   }
 </style>
 </head>
-
 <body>
-
-  <!-- COPOS DE NIEVE GENERADOS AUTOMÁTICAMENTE -->
-  <script>
-    const snowCount = 30; // número de copos
-    for (let i = 0; i < snowCount; i++) {
-      const snowflake = document.createElement('div');
-      snowflake.classList.add('snowflake');
-      snowflake.textContent = '❄';
-      snowflake.style.left = Math.random() * 100 + 'vw';
-      snowflake.style.animationDuration = 4 + Math.random() * 6 + 's';
-      snowflake.style.fontSize = 1 + Math.random() * 1.5 + 'em';
-      document.body.appendChild(snowflake);
-    }
-  </script>
-
-  <h1>🎄 Lista de deseos navideños 🎁</h1>
+  <h1>🎄 Lista de Deseos Navideños 🎁</h1>
 
   <div class="product-container">
 
-    <!-- PRODUCTO 1 -->
+    <!-- PRODUCTO 1: Retroid Pocket -->
     <div class="product">
-      <a href="https://www.aliexpress.com/item/1005008579813379.html?pdp_ext_f=%7B%22sku_id%22%3A%2212000047641224748%22%7D&sourceType=1&spm=a2g0o.wish-manage-home.0.0" target="_blank">
-        <img src="https://i.imgur.com/tPmCQ1V.jpeg" alt="Retroid Pocket Flip 2">
-        <p>Retroid Pocket Flip 2</p>
+      <a href="https://www.goretroid.com/products/retroid-pocket-3-plus" target="_blank">
+        <img src="https://i.imgur.com/tPmCQ1V.jpeg" alt="Retroid Pocket 3+">
+        <p>Retroid Pocket 3+</p>
       </a>
     </div>
 
-    <!-- PRODUCTO 2 -->
+    <!-- PRODUCTO 2: Suzuki Jimny -->
     <div class="product">
-      <a href="https://es.aliexpress.com/item/1005008683660781.html" target="_blank">
-        <img src="https://i.imgur.com/0bJj0SI.png" alt="Jimny Control Remoto">
-        <p>Jimny Control Remoto</p>
+      <a href="https://www.suzuki.com.mx/automoviles/jimny" target="_blank">
+        <img src="https://i.imgur.com/0bJj0SI.png" alt="Suzuki Jimny">
+        <p>Suzuki Jimny</p>
       </a>
     </div>
 
-    <!-- PRODUCTO 3: TinyCircuits Transparente -->
+    <!-- PRODUCTO 3: Suéter táctico -->
     <div class="product">
-      <a href="https://www.amazon.com.mx/TinyCircuits-transparente-consola-peque%C3%B1a-programable/dp/B0B5FHYJ83" target="_blank">
-        <img src="https://i.imgur.com/s2mA6cJ.png" alt="TinyCircuits Transparente">
-        <p>TinyCircuits Transparente</p>
+      <a href="https://www.aliexpress.com/p/tesla-landing/index.html?scenario=c_ppc_item_bridge&productId=1005007928567290&_immersiveMode=true" target="_blank">
+        <img src="https://i.imgur.com/jWyx5xN.png" alt="Suéter táctico">
+        <p>Suéter táctico</p>
       </a>
     </div>
 
-    <!-- PRODUCTO 4: Suéter Táctico -->
+    <!-- PRODUCTO 4: Tiny Circuits -->
     <div class="product">
-      <a href="https://www.aliexpress.com/p/tesla-landing/index.html?scenario=c_ppc_item_bridge&productId=1005007928567290&_immersiveMode=true&withMainCard=true&src=google&aff_platform=true&isdl=y&src=google&albch=shopping&acnt=742-864-1166&isdl=y&slnk=&plac=&mtctp=&albbt=Google_7_shopping&aff_platform=google&aff_short_key=UneMJZVf&gclsrc=aw.ds&&albagn=888888&&ds_e_adid=&ds_e_matchtype=&ds_e_device=c&ds_e_network=x&ds_e_product_group_id=&ds_e_product_id=es1005007928567290&ds_e_product_merchant_id=535030661&ds_e_product_country=MX&ds_e_product_language=es&ds_e_product_channel=online&ds_e_product_store_id=&ds_url_v=2&albcp=21989024792&albag=&isSmbAutoCall=false&needSmbHouyi=false&gad_source=4&gad_campaignid=21992960584&gbraid=0AAAAA99aYpfbrhGUd-ODuJ3qOYw_5YUP-&gclid=CjwKCAjwjffHBhBuEiwAKMb8pKoP0NJ0GIuEAkhW1TJigZxcpxohyV2O4QhzNwq8ymyTIstePJj9BxoCej8QAvD_BwE" target="_blank">
-        <img src="https://i.imgur.com/jWyx5xN.png" alt="Suéter Táctico Tesla">
-        <p>Suéter Táctico</p>
+      <a href="https://i.ytimg.com/vi/bznyJQmYE9g/hq720.jpg" target="_blank">
+        <img src="https://i.imgur.com/s2mA6cJ.png" alt="Tiny Circuits">
+        <p>Tiny Circuits</p>
       </a>
     </div>
 
-    <!-- PRODUCTO 5: Carro con cámara -->
+    <!-- PRODUCTO 5: Retroid Pocket 4 Pro -->
     <div class="product">
-      <a href="https://es.aliexpress.com/item/1005010193581615.html?spm=a2g0o.tesla.0.0.1d97NbylNbylDV&pdp_npi=6%40dis%21MXN%21MX%24428.41%21MX%24269.90%21%21%21%21%21%402103212517615286278303175ec588%2112000051478367619%21btfpre%21%21%21%211%210%21&afTraceInfo=1005010193581615__pc__c_ppc_item_bridge_pc_same_wf__VlBekH1__1761528628268&gatewayAdapt=glo2esp" target="_blank">
-        <img src="https://i.imgur.com/5PVqzOF.png" alt="Carro control remoto con cámara">
-        <p>Carro control remoto con cámara</p>
+      <a href="https://www.goretroid.com/products/retroid-pocket-4-pro" target="_blank">
+        <img src="https://imgur.com/tPmCQ1V.jpeg" alt="Retroid Pocket 4 Pro">
+        <p>Retroid Pocket 4 Pro</p>
+      </a>
+    </div>
+
+    <!-- PRODUCTO 6: TUBBZ Mini Batman -->
+    <div class="product">
+      <a href="https://tubbzus.com/collections/mini-tubbz/products/dc-comics-tubbz-mini-batman" target="_blank">
+        <img src="https://imgur.com/7lJRR5W.png" alt="TUBBZ Mini Batman">
+        <p>TUBBZ Mini Batman</p>
+      </a>
+    </div>
+
+    <!-- PRODUCTO 7: Pop! Games Fortnite – Peely -->
+    <div class="product">
+      <a href="https://www.mercadolibre.com.mx/pop-games-fortnite--peely/up/MLMU446571966" target="_blank">
+        <img src="https://imgur.com/Rmjn8rs.png" alt="Pop Games Fortnite Peely">
+        <p>Pop! Games Fortnite – Peely</p>
+      </a>
+    </div>
+
+    <!-- PRODUCTO 8: Nuevo producto de AliExpress -->
+    <div class="product">
+      <a href="https://es.aliexpress.com/item/1005009514518794.html" target="_blank">
+        <img src="https://imgur.com/m7my83u.png" alt="Producto de AliExpress">
+        <p>Producto de AliExpress</p>
       </a>
     </div>
 
   </div>
 
-  <footer>✨   ✨</footer>
-
+  <script>
+    // Genera copos de nieve aleatorios
+    const numFlakes = 40;
+    for (let i = 0; i < numFlakes; i++) {
+      const flake = document.createElement('div');
+      flake.classList.add('snowflake');
+      flake.textContent = '❄';
+      flake.style.left = Math.random() * 100 + 'vw';
+      flake.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      flake.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      flake.style.opacity = Math.random();
+      document.body.appendChild(flake);
+      flake.style.animation = `snow ${Math.random() * 5 + 5}s linear infinite`;
+    }
+  </script>
 </body>
 </html>
+
+
 
 
 
