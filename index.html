@@ -152,7 +152,61 @@
       <a href="https://www.mercadolibre.com.mx/raspberry-pi-4-b-2gb-fuente-carcasa-disipador-kit/p/MLM55775701" target="_blank">
         <img src="https://i.imgur.com/Ez2PEM4.png" alt="Raspberry Pi 4 Kit">
         <p>Raspberry Pi 4 Kit</p>
+      </a>
+    </div>
 
+    <!-- NUEVOS PRODUCTOS AÑADIDOS -->
+
+    <!-- Sudadera León -->
+    <div class="product">
+      <a href="https://www.amazon.com.mx/Lion-Nardo-delgado-tortuga-t%C3%A9rmico/dp/B0CCDKYW7L" target="_blank">
+        <img src="https://imgur.com/FgWJKDL.png" alt="Sudadera León">
+        <p>Sudadera de león térmica</p>
+      </a>
+    </div>
+
+    <!-- Batman: La guía definitiva -->
+    <div class="product">
+      <a href="https://www.sanborns.com.mx/producto/348507/batman-la-guia-definitiva" target="_blank">
+        <img src="https://imgur.com/XjOvhgV.png" alt="Batman: La guía definitiva">
+        <p>Batman, La guía definitiva</p>
+      </a>
+    </div>
+
+    <!-- Funko Sheldon -->
+    <div class="product">
+      <a href="https://www.ebay.com/itm/317236005520?_trkparms=amclksrc%3DITM%26aid%3D1110028%26algo%3DHOMESPLICE.EXPLORE%26ao%3D1%26asc%3D20240513110749%26meid%3Dd350836067f74f08bcf99a677f9b8b62%26pid%3D102140%26rk%3D4%26rkt%3D6%26itm%3D317236005520%26pmt%3D0%26noa%3D1%26pg%3D3959035%26algv%3DExploreForYouSavedFeedV1%26brand%3DFunko%26fpg%3D0&_trksid=p3959035.c102140.m167418" target="_blank">
+        <img src="https://imgur.com/ZkvpxTF.png" alt="Funko Sheldon">
+        <p>Funko Sheldon</p>
+      </a>
+    </div>
+
+    <!-- Funko CatDog -->
+    <div class="product">
+      <a href="https://www.ebay.com/itm/115803173433?_trkparms=amclksrc%3DITM%26aid%3D1110028%26algo%3DHOMESPLICE.EXPLORE%26ao%3D1%26asc%3D20240513110749%26meid%3Dd350836067f74f08bcf99a677f9b8b62%26pid%3D102140%26rk%3D6%26rkt%3D6%26itm%3D115803173433%26pmt%3D0%26noa%3D1%26pg%3D3959035%26algv%3DExploreForYouSavedFeedV1%26brand%3DFunko%26fpg%3D0&_trksid=p3959035.c102140.m167418" target="_blank">
+        <img src="https://imgur.com/YtczKnG.png" alt="Funko CatDog">
+        <p>Funko CatDog</p>
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    const numFlakes = 40;
+    for (let i = 0; i < numFlakes; i++) {
+      const flake = document.createElement('div');
+      flake.classList.add('snowflake');
+      flake.textContent = '❄';
+      flake.style.left = Math.random() * 100 + 'vw';
+      flake.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      flake.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      flake.style.opacity = Math.random();
+      document.body.appendChild(flake);
+      flake.style.animation = `snow ${Math.random() * 5 + 5}s linear infinite`;
+    }
+  </script>
+</body>
+</html>
 
 
 
