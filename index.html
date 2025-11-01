@@ -29,6 +29,32 @@
     100% { text-shadow: 0 0 10px gold; color: #ffff66; }
   }
 
+  /* Pac-Man debajo del título */
+  .pacman-container {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+
+  .pacman {
+    width: 40px;
+    height: 40px;
+    background: yellow;
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    clip-path: polygon(100% 50%, 50% 50%, 50% 0, 50% 50%, 50% 100%);
+    animation: pacmanMove 4s linear infinite alternate;
+  }
+
+  @keyframes pacmanMove {
+    0% { left: -50px; transform: rotate(0deg); }
+    50% { left: calc(100% - 50px); transform: rotate(180deg); }
+    100% { left: -50px; transform: rotate(360deg); }
+  }
+
   .product-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -96,6 +122,11 @@
 </head>
 <body>
   <h1>🎄 Lista de Deseos Navideños 🎁</h1>
+
+  <!-- Pac-Man debajo del título -->
+  <div class="pacman-container">
+    <div class="pacman"></div>
+  </div>
 
   <div class="product-container">
 
