@@ -5,249 +5,187 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎄 Lista de Deseos Navideños 🎁</title>
 <style>
+  /* Fondo con animación de copos */
   body {
     background: linear-gradient(135deg, #001f3f, #004d40);
     color: white;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Press Start 2P', cursive;
     text-align: center;
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
   }
 
   h1 {
-    font-size: 2.5em;
+    font-size: 1.5rem;
     margin-top: 20px;
-    animation: colorChange 5s infinite alternate;
-  }
-
-  @keyframes colorChange {
-    0% { text-shadow: 0 0 10px red; color: #ff4d4d; }
-    25% { text-shadow: 0 0 10px green; color: #00ff99; }
-    50% { text-shadow: 0 0 10px blue; color: #66ccff; }
-    75% { text-shadow: 0 0 10px purple; color: #cc66ff; }
-    100% { text-shadow: 0 0 10px gold; color: #ffff66; }
   }
 
   .product-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    margin: 40px;
+    gap: 30px;
+    margin-top: 40px;
   }
 
   .product {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    box-shadow: 0 0 10px rgba(255,255,255,0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
     padding: 15px;
+    width: 230px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s;
+    cursor: pointer;
   }
 
   .product:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 25px rgba(255,255,255,0.6);
+    transform: scale(1.05);
   }
 
   .product img {
     width: 100%;
-    border-radius: 15px;
+    border-radius: 10px;
   }
 
   .product p {
-    font-size: 1.1em;
-    margin-top: 10px;
-    color: #fff;
-    font-weight: bold;
+    font-size: 12px;
+    margin-top: 8px;
   }
 
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+  }
+
+  .btn-link {
+    background: #ff4081;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 10px;
+    transition: background 0.3s;
+  }
+
+  .btn-link:hover {
+    background: #f50057;
+  }
+
+  /* Copos de nieve animados */
   @keyframes snow {
-    0% { transform: translateY(0px); opacity: 1; }
+    0% { transform: translateY(0); opacity: 1; }
     100% { transform: translateY(100vh); opacity: 0; }
   }
 
   .snowflake {
     position: fixed;
-    top: -10px;
-    font-size: 1em;
+    top: 0;
     color: white;
+    font-size: 1em;
     animation: snow linear infinite;
-    z-index: 999;
   }
 
-  /* Botones para el Funko Jake */
-  .option-buttons a {
-    background: #ffcc00;
-    color: #000;
-    padding: 8px 12px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: all 0.3s ease;
+  /* ===== PAC-MAN ANIMADO ===== */
+  .pacman-container {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 10;
   }
 
-  .option-buttons a:hover {
-    background: gold;
-    box-shadow: 0 0 10px gold;
+  .pacman {
+    position: absolute;
+    top: 0;
+    left: -50px;
+    width: 32px;
+    height: 32px;
+    background: radial-gradient(circle at 10px 10px, #ffeb3b 90%, transparent 91%);
+    clip-path: polygon(50% 50%, 100% 0%, 100% 100%);
+    animation: pacman-move 6s linear infinite;
+  }
+
+  .pacman::before {
+    content: "";
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: #ffeb3b;
+    clip-path: polygon(0 0, 100% 25%, 100% 75%, 0 100%);
+    animation: pacman-mouth 0.4s infinite alternate;
+  }
+
+  @keyframes pacman-move {
+    0% { transform: translateX(-60px) scaleX(1); }
+    50% { transform: translateX(calc(100vw - 40px)) scaleX(1); }
+    51% { transform: translateX(calc(100vw - 40px)) scaleX(-1); }
+    100% { transform: translateX(-60px) scaleX(-1); }
+  }
+
+  @keyframes pacman-mouth {
+    0% { clip-path: polygon(0 0, 100% 25%, 100% 75%, 0 100%); }
+    100% { clip-path: polygon(0 0, 100% 50%, 100% 50%, 0 100%); }
   }
 </style>
 </head>
 <body>
-  <h1>🎄 Lista de Deseos Navideños 🎁</h1>
 
-  <div class="product-container">
+<h1>🎄 Lista de Deseos Navideños 🎁</h1>
 
-    <!-- Retroid Pocket Flip 2 -->
-    <div class="product">
-      <a href="https://www.aliexpress.com/p/tesla-landing/index.html?productId=1005007725220793" target="_blank">
-        <img src="https://i.imgur.com/tPmCQ1V.jpeg" alt="Retroid Pocket Flip 2">
-        <p>Retroid Pocket Flip 2</p>
-      </a>
-    </div>
+<!-- PAC-MAN animado -->
+<div class="pacman-container">
+  <div class="pacman"></div>
+</div>
 
-    <!-- Suzuki Jimny RC -->
-    <div class="product">
-      <a href="https://es.aliexpress.com/item/1005010144145913.html" target="_blank">
-        <img src="https://i.imgur.com/0bJj0SI.png" alt="Suzuki Jimny RC">
-        <p>Suzuki Jimny (RC)</p>
-      </a>
-    </div>
+<div class="product-container">
 
-    <!-- Suéter táctico -->
-    <div class="product">
-      <a href="https://www.aliexpress.com/p/tesla-landing/index.html?productId=1005007928567290" target="_blank">
-        <img src="https://i.imgur.com/jWyx5xN.png" alt="Suéter táctico">
-        <p>Suéter táctico</p>
-      </a>
-    </div>
-
-    <!-- Tiny Circuits -->
-    <div class="product">
-      <a href="https://www.amazon.com.mx/TinyCircuits-transparente-consola-peque%C3%B1a-programable/dp/B0B5FHYJ83" target="_blank">
-        <img src="https://i.imgur.com/s2mA6cJ.png" alt="Tiny Circuits">
-        <p>Tiny Circuits</p>
-      </a>
-    </div>
-
-    <!-- TUBBZ Mini Batman -->
-    <div class="product">
-      <a href="https://tubbzus.com/collections/mini-tubbz/products/dc-comics-tubbz-mini-batman" target="_blank">
-        <img src="https://imgur.com/7lJRR5W.png" alt="TUBBZ Mini Batman">
-        <p>TUBBZ Mini Batman</p>
-      </a>
-    </div>
-
-    <!-- Pop! Games Fortnite – Peely -->
-    <div class="product">
-      <a href="https://www.mercadolibre.com.mx/pop-games-fortnite--peely/up/MLMU446571966" target="_blank">
-        <img src="https://imgur.com/Rmjn8rs.png" alt="Pop Games Fortnite Peely">
-        <p>Pop! Games Fortnite – Peely</p>
-      </a>
-    </div>
-
-    <!-- Producto de AliExpress -->
-    <div class="product">
-      <a href="https://es.aliexpress.com/item/1005009514518794.html" target="_blank">
-        <img src="https://imgur.com/m7my83u.png" alt="Producto de AliExpress">
-        <p>Producto de AliExpress</p>
-      </a>
-    </div>
-
-    <!-- Tarjeta de regalo Steam -->
-    <div class="product">
-      <a href="https://store.steampowered.com/digitalgiftcards/selectgiftcard?l=latam" target="_blank">
-        <img src="https://i.imgur.com/q9F3Pdv.png" alt="Tarjeta de regalo Steam">
-        <p>Tarjeta de regalo Steam</p>
-      </a>
-    </div>
-
-    <!-- Raspberry Pi 4 Kit -->
-    <div class="product">
-      <a href="https://www.mercadolibre.com.mx/raspberry-pi-4-b-2gb-fuente-carcasa-disipador-kit/p/MLM55775701" target="_blank">
-        <img src="https://i.imgur.com/Ez2PEM4.png" alt="Raspberry Pi 4 Kit">
-        <p>Raspberry Pi 4 Kit</p>
-      </a>
-    </div>
-
-    <!-- Sudadera León -->
-    <div class="product">
-      <a href="https://www.amazon.com.mx/Lion-Nardo-delgado-tortuga-t%C3%A9rmico/dp/B0CCDKYW7L" target="_blank">
-        <img src="https://imgur.com/FgWJKDL.png" alt="Sudadera León">
-        <p>Sudadera de león térmica</p>
-      </a>
-    </div>
-
-    <!-- Batman: La guía definitiva -->
-    <div class="product">
-      <a href="https://www.sanborns.com.mx/producto/348507/batman-la-guia-definitiva" target="_blank">
-        <img src="https://imgur.com/XjOvhgV.png" alt="Batman: La guía definitiva">
-        <p>Batman, La guía definitiva</p>
-      </a>
-    </div>
-
-    <!-- Funko Sheldon -->
-    <div class="product">
-      <a href="https://www.ebay.com/itm/317236005520?_trkparms=amclksrc%3DITM%26aid%3D1110028%26algo%3DHOMESPLICE.EXPLORE%26ao%3D1%26asc%3D20240513110749%26meid%3Dd350836067f74f08bcf99a677f9b8b62%26pid%3D102140%26rk%3D4%26rkt%3D6%26itm%3D317236005520%26pmt%3D0%26noa%3D1%26pg%3D3959035%26algv%3DExploreForYouSavedFeedV1%26brand%3DFunko%26fpg%3D0&_trksid=p3959035.c102140.m167418" target="_blank">
-        <img src="https://imgur.com/ZkvpxTF.png" alt="Funko Sheldon">
-        <p>Funko Sheldon</p>
-      </a>
-    </div>
-
-    <!-- Funko CatDog -->
-    <div class="product">
-      <a href="https://www.ebay.com/itm/115803173433?_trkparms=amclksrc%3DITM%26aid%3D1110028%26algo%3DHOMESPLICE.EXPLORE%26ao%3D1%26asc%3D20240513110749%26meid%3Dd350836067f74f08bcf99a677f9b8b62%26pid%3D102140%26rk%3D6%26rkt%3D6%26itm%3D115803173433%26pmt%3D0%26noa%3D1%26pg%3D3959035%26algv%3DExploreForYouSavedFeedV1%26brand%3DFunko%26fpg%3D0&_trksid=p3959035.c102140.m167418" target="_blank">
-        <img src="https://imgur.com/YtczKnG.png" alt="Funko CatDog">
-        <p>Funko CatDog</p>
-      </a>
-    </div>
-
-    <!-- Creeper Amigurumi -->
-    <div class="product">
-      <a href="https://www.amazon.com/Woobles-Minecraft-Crochet-Kit-Beginner/dp/B0F9Z3B8ZY?th=1" target="_blank">
-        <img src="https://imgur.com/tqXtkwI.png" alt="Creeper Amigurumi">
-      </a>
-      <p>Creeper Amigurumi</p>
-      <p style="font-size: 0.9em; color: #ccc; margin-top: -5px;">(ese se tiene que hacer 😢)</p>
-    </div>
-
-    <!-- Tesla Hot Wheels control remoto -->
-    <div class="product">
-      <a href="https://www.amazon.com.mx/Hot-Wheels-Recargables-radiocontrol-Controlador/dp/B08J4GMVVY/ref=asc_df_B08J4GMVVY?mcid=cc361230eb25361f98cb75febd47665e&tag=gledskshopmx-20&linkCode=df0&hvadid=709899077212&hvpos=&hvnetw=g&hvrand=7558742992293856049&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1010000&hvtargid=pla-1239015162444&language=es_MX&gad_source=1&th=1" target="_blank">
-        <img src="https://imgur.com/nAIPsUb.png" alt="Tesla Hot Wheels RC">
-        <p>Tesla Hot Wheels (Control remoto)</p>
-      </a>
-    </div>
-
-    <!-- Funko Pop Jake -->
-    <div class="product">
-      <img src="https://imgur.com/QB5wFP4.png" alt="Funko Pop Jake">
-      <p>Funko Pop! Jake (Hora de Aventura)</p>
-      <div class="option-buttons" style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
-        <a href="https://www.mercadolibre.com.mx/funko-pop-jake-hora-de-aventura-jake-33/up/MLMU3057389340?pdp_filters=item_id%3AMLM2253100773#polycard_client=bookmarks&wid=MLM2253100773&sid=bookmarks" target="_blank">Opción 1</a>
-        <a href="https://www.mercadolibre.com.mx/hora-de-aventura-funko-pop--jake-33-nuevo/up/MLMU3509213006?pdp_filters=item_id%3AMLM4242291886#polycard_client=bookmarks&wid=MLM4242291886&sid=bookmarks" target="_blank">Opción 2</a>
-      </div>
-    </div>
-
+  <!-- Creeper amigurumi -->
+  <div class="product" onclick="window.open('https://www.amazon.com/Woobles-Minecraft-Crochet-Kit-Beginner/dp/B0F9Z3B8ZY?th=1')">
+    <img src="https://imgur.com/tqXtkwI.png" alt="Creeper Amigurumi">
+    <p>Creeper Amigurumi</p>
+    <p style="font-size: 10px; color: #ccc;">(Este se tiene que hacer 😢)</p>
   </div>
 
-  <script>
-    const numFlakes = 40;
-    for (let i = 0; i < numFlakes; i++) {
-      const flake = document.createElement('div');
-      flake.classList.add('snowflake');
-      flake.textContent = '❄';
-      flake.style.left = Math.random() * 100 + 'vw';
-      flake.style.animationDuration = (Math.random() * 3 + 3) + 's';
-      flake.style.fontSize = (Math.random() * 20 + 10) + 'px';
-      flake.style.opacity = Math.random();
-      document.body.appendChild(flake);
-      flake.style.animation = `snow ${Math.random() * 5 + 5}s linear infinite`;
-    }
-  </script>
+  <!-- Tesla Hot Wheels -->
+  <div class="product" onclick="window.open('https://www.amazon.com.mx/Hot-Wheels-Recargables-radiocontrol-Controlador/dp/B08J4GMVVY/ref=asc_df_B08J4GMVVY?mcid=cc361230eb25361f98cb75febd47665e&tag=gledskshopmx-20&linkCode=df0&hvadid=709899077212&hvpos=&hvnetw=g&hvrand=7558742992293856049&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1010000&hvtargid=pla-1239015162444&language=es_MX&gad_source=1&th=1')">
+    <img src="https://imgur.com/nAIPsUb.png" alt="Tesla Hot Wheels RC">
+    <p>Tesla Hot Wheels Control Remoto</p>
+  </div>
+
+  <!-- Funko Pop Jake con dos enlaces -->
+  <div class="product">
+    <img src="https://imgur.com/QB5wFP4.png" alt="Funko Pop Jake">
+    <p>Funko Pop Jake (Hora de Aventura)</p>
+    <div class="buttons">
+      <a class="btn-link" href="https://www.mercadolibre.com.mx/funko-pop-jake-hora-de-aventura-jake-33/up/MLMU3057389340?pdp_filters=item_id%3AMLM2253100773#polycard_client=bookmarks&wid=MLM2253100773&sid=bookmarks" target="_blank">Opción 1</a>
+      <a class="btn-link" href="https://www.mercadolibre.com.mx/hora-de-aventura-funko-pop--jake-33-nuevo/up/MLMU3509213006?pdp_filters=item_id%3AMLM4242291886#polycard_client=bookmarks&wid=MLM4242291886&sid=bookmarks" target="_blank">Opción 2</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Generador de copos de nieve ❄️
+  const snowflakes = 40;
+  for (let i = 0; i < snowflakes; i++) {
+    const flake = document.createElement('div');
+    flake.classList.add('snowflake');
+    flake.innerHTML = '❄️';
+    flake.style.left = Math.random() * 100 + 'vw';
+    flake.style.animationDuration = 5 + Math.random() * 10 + 's';
+    flake.style.fontSize = 10 + Math.random() * 15 + 'px';
+    flake.style.animationDelay = Math.random() * 10 + 's';
+    document.body.appendChild(flake);
+  }
+</script>
+
 </body>
 </html>
+
 
 
 
