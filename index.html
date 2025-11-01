@@ -5,94 +5,113 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎄 Lista de Deseos Navideños 🎁</title>
 <style>
-  /* Fondo con animación de copos */
   body {
     background: linear-gradient(135deg, #001f3f, #004d40);
     color: white;
-    font-family: 'Press Start 2P', cursive;
+    font-family: "Poppins", sans-serif;
     text-align: center;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
   }
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 2.5em;
     margin-top: 20px;
+    animation: colorChange 5s infinite alternate;
+  }
+
+  @keyframes colorChange {
+    0% { text-shadow: 0 0 10px red; color: #ff4d4d; }
+    25% { text-shadow: 0 0 10px green; color: #00ff99; }
+    50% { text-shadow: 0 0 10px blue; color: #66ccff; }
+    75% { text-shadow: 0 0 10px purple; color: #cc66ff; }
+    100% { text-shadow: 0 0 10px gold; color: #ffff66; }
   }
 
   .product-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
     justify-content: center;
-    gap: 30px;
-    margin-top: 40px;
+    align-items: center;
+    margin: 40px;
   }
 
   .product {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
     padding: 15px;
-    width: 230px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    transition: transform 0.3s;
-    cursor: pointer;
   }
 
   .product:hover {
-    transform: scale(1.05);
+    transform: scale(1.07);
+    box-shadow: 0 0 25px rgba(255,255,255,0.6);
   }
 
   .product img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 15px;
   }
 
   .product p {
-    font-size: 12px;
-    margin-top: 8px;
+    font-size: 1.1em;
+    margin-top: 10px;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .product small {
+    display: block;
+    font-size: 0.9em;
+    color: #ccc;
+    margin-top: 4px;
   }
 
   .buttons {
     display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
   }
 
-  .btn-link {
-    background: #ff4081;
-    border: none;
+  .buttons a {
+    background: #ff4d8d;
     color: white;
-    padding: 6px 10px;
-    border-radius: 10px;
+    padding: 5px 12px;
+    border-radius: 12px;
     text-decoration: none;
-    font-size: 10px;
-    transition: background 0.3s;
+    font-size: 0.85em;
+    transition: 0.3s;
   }
 
-  .btn-link:hover {
-    background: #f50057;
+  .buttons a:hover {
+    background: #ff85a2;
   }
 
-  /* Copos de nieve animados */
   @keyframes snow {
-    0% { transform: translateY(0); opacity: 1; }
+    0% { transform: translateY(0px); opacity: 1; }
     100% { transform: translateY(100vh); opacity: 0; }
   }
 
   .snowflake {
     position: fixed;
-    top: 0;
-    color: white;
+    top: -10px;
     font-size: 1em;
+    color: white;
     animation: snow linear infinite;
+    z-index: 999;
   }
 
-  /* ===== PAC-MAN ANIMADO ===== */
+  /* ==== PACMAN 8-BIT ==== */
   .pacman-container {
     position: absolute;
-    top: 40px;
+    top: 60px;
     left: 0;
     width: 100%;
-    height: 40px;
+    height: 60px;
     overflow: hidden;
     pointer-events: none;
     z-index: 10;
@@ -101,96 +120,95 @@
   .pacman {
     position: absolute;
     top: 0;
-    left: -50px;
-    width: 32px;
-    height: 32px;
-    background: radial-gradient(circle at 10px 10px, #ffeb3b 90%, transparent 91%);
-    clip-path: polygon(50% 50%, 100% 0%, 100% 100%);
-    animation: pacman-move 6s linear infinite;
-  }
-
-  .pacman::before {
-    content: "";
-    position: absolute;
-    width: 32px;
-    height: 32px;
+    left: -60px;
+    width: 40px;
+    height: 40px;
     background: #ffeb3b;
-    clip-path: polygon(0 0, 100% 25%, 100% 75%, 0 100%);
-    animation: pacman-mouth 0.4s infinite alternate;
+    border-radius: 50%;
+    animation: movePacman 14s linear infinite;
+    box-shadow: 0 0 10px #ffeb3b;
   }
 
-  @keyframes pacman-move {
+  .pacman-mouth {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: #001f3f;
+    clip-path: polygon(50% 50%, 100% 15%, 100% 85%);
+    animation: mouthMove 0.4s infinite alternate;
+    border-radius: 50%;
+  }
+
+  @keyframes movePacman {
     0% { transform: translateX(-60px) scaleX(1); }
-    50% { transform: translateX(calc(100vw - 40px)) scaleX(1); }
-    51% { transform: translateX(calc(100vw - 40px)) scaleX(-1); }
+    50% { transform: translateX(calc(100vw - 60px)) scaleX(1); }
+    51% { transform: translateX(calc(100vw - 60px)) scaleX(-1); }
     100% { transform: translateX(-60px) scaleX(-1); }
   }
 
-  @keyframes pacman-mouth {
-    0% { clip-path: polygon(0 0, 100% 25%, 100% 75%, 0 100%); }
-    100% { clip-path: polygon(0 0, 100% 50%, 100% 50%, 0 100%); }
+  @keyframes mouthMove {
+    0% { clip-path: polygon(50% 50%, 100% 15%, 100% 85%); }
+    100% { clip-path: polygon(50% 50%, 100% 40%, 100% 60%); }
   }
 </style>
 </head>
 <body>
+  <h1>🎄 Lista de Deseos Navideños 🎁</h1>
 
-<h1>🎄 Lista de Deseos Navideños 🎁</h1>
-
-<!-- PAC-MAN animado -->
-<div class="pacman-container">
-  <div class="pacman"></div>
-</div>
-
-<div class="product-container">
-
-  <!-- Creeper amigurumi -->
-  <div class="product" onclick="window.open('https://www.amazon.com/Woobles-Minecraft-Crochet-Kit-Beginner/dp/B0F9Z3B8ZY?th=1')">
-    <img src="https://imgur.com/tqXtkwI.png" alt="Creeper Amigurumi">
-    <p>Creeper Amigurumi</p>
-    <p style="font-size: 10px; color: #ccc;">(Este se tiene que hacer 😢)</p>
-  </div>
-
-  <!-- Tesla Hot Wheels -->
-  <div class="product" onclick="window.open('https://www.amazon.com.mx/Hot-Wheels-Recargables-radiocontrol-Controlador/dp/B08J4GMVVY/ref=asc_df_B08J4GMVVY?mcid=cc361230eb25361f98cb75febd47665e&tag=gledskshopmx-20&linkCode=df0&hvadid=709899077212&hvpos=&hvnetw=g&hvrand=7558742992293856049&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1010000&hvtargid=pla-1239015162444&language=es_MX&gad_source=1&th=1')">
-    <img src="https://imgur.com/nAIPsUb.png" alt="Tesla Hot Wheels RC">
-    <p>Tesla Hot Wheels Control Remoto</p>
-  </div>
-
-  <!-- Funko Pop Jake con dos enlaces -->
-  <div class="product">
-    <img src="https://imgur.com/QB5wFP4.png" alt="Funko Pop Jake">
-    <p>Funko Pop Jake (Hora de Aventura)</p>
-    <div class="buttons">
-      <a class="btn-link" href="https://www.mercadolibre.com.mx/funko-pop-jake-hora-de-aventura-jake-33/up/MLMU3057389340?pdp_filters=item_id%3AMLM2253100773#polycard_client=bookmarks&wid=MLM2253100773&sid=bookmarks" target="_blank">Opción 1</a>
-      <a class="btn-link" href="https://www.mercadolibre.com.mx/hora-de-aventura-funko-pop--jake-33-nuevo/up/MLMU3509213006?pdp_filters=item_id%3AMLM4242291886#polycard_client=bookmarks&wid=MLM4242291886&sid=bookmarks" target="_blank">Opción 2</a>
+  <!-- PACMAN -->
+  <div class="pacman-container">
+    <div class="pacman">
+      <div class="pacman-mouth"></div>
     </div>
   </div>
 
-</div>
+  <div class="product-container">
 
-<script>
-  // Generador de copos de nieve ❄️
-  const snowflakes = 40;
-  for (let i = 0; i < snowflakes; i++) {
-    const flake = document.createElement('div');
-    flake.classList.add('snowflake');
-    flake.innerHTML = '❄️';
-    flake.style.left = Math.random() * 100 + 'vw';
-    flake.style.animationDuration = 5 + Math.random() * 10 + 's';
-    flake.style.fontSize = 10 + Math.random() * 15 + 'px';
-    flake.style.animationDelay = Math.random() * 10 + 's';
-    document.body.appendChild(flake);
-  }
-</script>
+    <!-- Creeper Amigurumi -->
+    <div class="product">
+      <a href="https://www.amazon.com/Woobles-Minecraft-Crochet-Kit-Beginner/dp/B0F9Z3B8ZY?th=1" target="_blank">
+        <img src="https://imgur.com/tqXtkwI.png" alt="Creeper Amigurumi">
+      </a>
+      <p>Creeper Amigurumi</p>
+      <small>(Este se tiene que hacer 😭)</small>
+    </div>
 
+    <!-- Tesla Hot Wheels Control Remoto -->
+    <div class="product">
+      <a href="https://www.amazon.com.mx/Hot-Wheels-Recargables-radiocontrol-Controlador/dp/B08J4GMVVY/ref=asc_df_B08J4GMVVY?mcid=cc361230eb25361f98cb75febd47665e" target="_blank">
+        <img src="https://imgur.com/nAIPsUb.png" alt="Tesla Hot Wheels Control Remoto">
+        <p>Tesla Hot Wheels Control Remoto</p>
+      </a>
+    </div>
+
+    <!-- Funko Pop Jake (Hora de Aventura) -->
+    <div class="product">
+      <img src="https://imgur.com/QB5wFP4.png" alt="Funko Pop Jake">
+      <p>Funko Pop Jake (Hora de Aventura)</p>
+      <div class="buttons">
+        <a href="https://www.mercadolibre.com.mx/funko-pop-jake-hora-de-aventura-jake-33/up/MLMU3057389340?pdp_filters=item_id%3AMLM2253100773#polycard_client=bookmarks&wid=MLM2253100773&sid=bookmarks" target="_blank">Opción 1</a>
+        <a href="https://www.mercadolibre.com.mx/hora-de-aventura-funko-pop--jake-33-nuevo/up/MLMU3509213006?pdp_filters=item_id%3AMLM4242291886#polycard_client=bookmarks&wid=MLM4242291886&sid=bookmarks" target="_blank">Opción 2</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const numFlakes = 40;
+    for (let i = 0; i < numFlakes; i++) {
+      const flake = document.createElement('div');
+      flake.classList.add('snowflake');
+      flake.textContent = '❄';
+      flake.style.left = Math.random() * 100 + 'vw';
+      flake.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      flake.style.fontSize = (Math.random() * 20 + 10) + 'px';
+      flake.style.opacity = Math.random();
+      document.body.appendChild(flake);
+      flake.style.animation = `snow ${Math.random() * 5 + 5}s linear infinite`;
+    }
+  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
